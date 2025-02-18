@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -425,6 +425,8 @@ namespace WiiTUIO.Provider
                     wiimoteid = this.pWiimoteMap[pDevice.HIDDevicePath].Status.ID;
                     this.pWiimoteMap[pDevice.HIDDevicePath].Teardown();
                     this.pWiimoteMap.Remove(pDevice.HIDDevicePath);
+
+                    OnDisconnect(wiimoteid, this.pWiimoteMap.Count);
                 }
                 else
                 {
@@ -440,8 +442,6 @@ namespace WiiTUIO.Provider
                 // Close the connection and dispose of the device.
                 pDevice.Disconnect();
                 pDevice.Dispose();
-
-                OnDisconnect(wiimoteid, this.pWiimoteMap.Count);
             }
         }
         #endregion
