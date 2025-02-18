@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -357,7 +357,24 @@ namespace WiiTUIO
                 statusStackMutex.WaitOne();
                 WiimoteStatusUC uc = new WiimoteStatusUC(ID);
                 uc.Visibility = Visibility.Collapsed;
-                this.statusStack.Children.Add(uc);
+
+                // To ascending order by ID.
+                int insertIndex = 0;
+                foreach (UIElement child in this.statusStack.Children)
+                {
+                    WiimoteStatusUC childUC = (WiimoteStatusUC)child;
+                    if (childUC.ID > ID)
+                    {
+                        this.statusStack.Children.Insert(insertIndex, uc);
+                        break;
+                    }
+                    insertIndex++;
+                }
+                if (!this.statusStack.Children.Contains(uc))
+                {
+                    this.statusStack.Children.Add(uc);
+                }
+
                 this.animateExpand(uc);
                 statusStackMutex.ReleaseMutex();
 
