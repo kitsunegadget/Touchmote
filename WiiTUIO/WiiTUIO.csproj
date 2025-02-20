@@ -295,6 +295,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="KeymapConfig\CustomStyleNumericUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="KeymapConfig\KeymapOutputRow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
