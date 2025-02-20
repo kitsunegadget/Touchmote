@@ -2,29 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" d:DesignWidth="419">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="/Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel x:Name="canvasSettings">
         <Canvas Height="222">
-            <Button x:Name="btnAppSettingsBack" Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Canvas.Left="10" Canvas.Top="10" Click="btnAppSettingsBack_Click">
-                <Rectangle Width="14" Height="14" Fill="Black" Opacity="0.8">
-                    <Rectangle.OpacityMask>
-                        <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Fill" />
-                    </Rectangle.OpacityMask>
-                </Rectangle>
-
-            </Button>
+            <Button x:Name="btnAppSettingsBack" Width="34" Height="34" Style="{DynamicResource MahApps.Styles.Button.Circle}" Canvas.Left="10" Canvas.Top="10" Click="btnAppSettingsBack_Click"
+                Content="{iconPacks:Material Kind=ArrowLeftThick, Width=16, Height=16}" Opacity="0.8"/>
 
             <CheckBox x:Name="cbWindowsStart" Content="Start Touchmote with Windows" Canvas.Left="125" Canvas.Top="87" FontFamily="Segoe UI Semilight" Checked="cbWindowsStart_Checked" Unchecked="cbWindowsStart_Unchecked"/>
             <!--Button Name="btnConfigDone" Content="Done" Canvas.Left="236" Canvas.Top="126" Width="44" Background="#FFECECEC" BorderBrush="Gainsboro" Height="25"/-->
