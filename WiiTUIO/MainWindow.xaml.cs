@@ -491,16 +491,16 @@ namespace WiiTUIO
 
         private void showConfig()
         {
-            if (this.mainPanel.IsVisible)
-            {
-                animateCollapse(this.mainPanel,false);
-            }
-            if (this.canvasAbout.IsVisible)
-            {
-                animateCollapse(this.canvasAbout, false);
-            }
             if (!this.canvasSettings.IsVisible)
             {
+                if (this.mainPanel.IsVisible)
+                {
+                    animateCollapse(this.mainPanel, false);
+                }
+                if (this.canvasAbout.IsVisible)
+                {
+                    animateCollapse(this.canvasAbout, false);
+                }
                 animateExpand(this.canvasSettings);
             }
             //this.mainPanel.Visibility = Visibility.Collapsed;
@@ -510,16 +510,16 @@ namespace WiiTUIO
 
         private void showMain()
         {
-            if (this.canvasSettings.IsVisible)
-            {
-                animateCollapse(this.canvasSettings, false);
-            }
-            if (this.canvasAbout.IsVisible)
-            {
-                animateCollapse(this.canvasAbout, false);
-            }
             if (!this.mainPanel.IsVisible)
             {
+                if (this.canvasSettings.IsVisible)
+                {
+                    animateCollapse(this.canvasSettings, false);
+                }
+                if (this.canvasAbout.IsVisible)
+                {
+                    animateCollapse(this.canvasAbout, false);
+                }
                 animateExpand(this.mainPanel);
             }
             //this.canvasSettings.Visibility = Visibility.Collapsed;
@@ -529,16 +529,16 @@ namespace WiiTUIO
 
         private void showAbout()
         {
-            if (this.canvasSettings.IsVisible)
-            {
-                animateCollapse(this.canvasSettings, false);
-            }
-            if (this.mainPanel.IsVisible)
-            {
-                animateCollapse(this.mainPanel, false);
-            }
             if (!this.canvasAbout.IsVisible)
             {
+                if (this.canvasSettings.IsVisible)
+                {
+                    animateCollapse(this.canvasSettings, false);
+                }
+                if (this.mainPanel.IsVisible)
+                {
+                    animateCollapse(this.mainPanel, false);
+                }
                 animateExpand(this.canvasAbout);
             }
             //this.mainPanel.Visibility = Visibility.Collapsed;

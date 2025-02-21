@@ -22,17 +22,18 @@ namespace WiiTUIO
                 elem.Height = double.NaN; //auto height
                 elem.Visibility = Visibility.Visible;
                 elem.Measure(new Size(2000,2000));
-                double height = (elem.DesiredSize.Height > 0) ? elem.DesiredSize.Height : elem.ActualHeight;
+                double height = (elem.ActualHeight < elem.DesiredSize.Height) ? elem.DesiredSize.Height : elem.ActualHeight;
                 DoubleAnimation pAnimation = createDoubleAnimation(height, 1000, false);
                 elem.Height = 0;
-                elem.Visibility = Visibility.Visible;
+                pAnimation.CurrentTimeInvalidated += (s, e) =>
+                {
+                    elem.Visibility = Visibility.Visible;
+                };
                 pAnimation.FillBehavior = FillBehavior.Stop;
                 pAnimation.Completed += delegate(object sender, EventArgs pEvent)
                 {
                     elem.Height = Double.NaN;
-                    //elem.BeginAnimation(FrameworkElement., null);
                 };
-                //pAnimation.Freeze();
                 elem.BeginAnimation(FrameworkElement.HeightProperty, pAnimation, HandoffBehavior.SnapshotAndReplace);
             }
         }
@@ -46,7 +47,6 @@ namespace WiiTUIO
                 pAnimation.FillBehavior = FillBehavior.Stop;
                 pAnimation.Completed += delegate(object sender, EventArgs pEvent)
                 {
-                    //elem.BeginAnimation(FrameworkElement.HeightProperty, null);
                     if (remove && elem.Parent is Panel)
                     {
                         ((Panel)elem.Parent).Children.Remove(elem);
@@ -57,7 +57,6 @@ namespace WiiTUIO
                         elem.Height = Double.NaN;
                     }
                 };
-                //pAnimation.Freeze();
                 elem.BeginAnimation(FrameworkElement.HeightProperty, pAnimation, HandoffBehavior.SnapshotAndReplace);
             }
         }
