@@ -14,13 +14,21 @@ using System.Windows.Forms;
 using WiiTUIO;
 public static class MinimizeToTray
 {
+    private static bool _isMinimizedOnce = false;
+
     /// <summary>
     /// Enables "minimize to tray" behavior for the specified Window.
     /// </summary>
     /// <param name="window">Window to enable the behavior for.</param>
     public static void Enable(Window window, bool minimizeNow)
     {
-        UIHelpers.HideFromAltTab(window);
+        // Prevents the taskbar icon from disappearing if it is not focused at startup.
+        if (_isMinimizedOnce)
+        {
+            UIHelpers.HideFromAltTab(window);
+            MinimizeToTray._isMinimizedOnce = true;
+        }
+
         if (MinimizeInstances.ContainsKey(window))
         {
             Console.WriteLine(string.Format("Minimization already enabled for '{0}'", window.Title));
@@ -148,6 +156,13 @@ public static class MinimizeToTray
                 // If this is the first time minimizing to the tray, show the user what happened
                 _notifyIcon.ShowBalloonTip(1000, null, _window.Title, ToolTipIcon.None);
                 _balloonShown = true;
+            }
+
+            // If hide on startup is prevented, hide on first minimize.
+            if (minimized && !MinimizeToTray._isMinimizedOnce)
+            {
+                UIHelpers.HideFromAltTab(_window);
+                MinimizeToTray._isMinimizedOnce = true;
             }
         }
 
