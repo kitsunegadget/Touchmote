@@ -50,6 +50,7 @@ namespace WiiTUIO
             this.cbMinimizeToTray.IsChecked = Settings.Default.minimizeToTray;
             this.cbPairOnStart.IsChecked = Settings.Default.pairOnStart;
             this.cbUseCustomCursor.IsChecked = Settings.Default.pointer_customCursor;
+            this.cbDisablePointerOverlay.IsChecked = Settings.Default.disablePointerOverlay;
 
             InputFactory.InputType inputType = InputFactory.getType(Settings.Default.input);
 
@@ -153,6 +154,15 @@ namespace WiiTUIO
         private void btnEditKeymaps_Click(object sender, RoutedEventArgs e)
         {
             KeymapConfigWindow.Instance.Show();
+        }
+        private void cbDisablePointerOverlay_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.disablePointerOverlay = true;
+        }
+
+        private void cbDisablePointerOverlay_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.disablePointerOverlay = false;
         }
     }
 }

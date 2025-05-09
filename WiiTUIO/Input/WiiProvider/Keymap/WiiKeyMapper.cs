@@ -498,7 +498,7 @@ namespace WiiTUIO.Provider
                 if (buttonName == "Home")
                 {
                     Console.WriteLine("home down");
-                    if (OverlayWindow.Current.OverlayIsOn())
+                    if (!Settings.Default.disablePointerOverlay && OverlayWindow.Current.OverlayIsOn())
                     {
                         this.hideOverlayOnUp = true;
                         Console.WriteLine("hide overlay on up");
@@ -522,12 +522,12 @@ namespace WiiTUIO.Provider
                     Console.WriteLine("home up");
                     this.homeButtonTimer.Stop();
 
-                    if (this.hideOverlayOnUp)
+                    if (!Settings.Default.disablePointerOverlay && this.hideOverlayOnUp)
                     {
                         this.hideOverlayOnUp = false;
                         OverlayWindow.Current.HideOverlay();
                     }
-                    else if (OverlayWindow.Current.OverlayIsOn()) //We opened the overlay on this down
+                    else if (!Settings.Default.disablePointerOverlay && OverlayWindow.Current.OverlayIsOn()) //We opened the overlay on this down
                     {
                     }
                     else

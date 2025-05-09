@@ -152,24 +152,27 @@ namespace WiiTUIO
             this.spInfoMsg.Visibility = Visibility.Collapsed;
             this.animateExpand(this.mainPanel);
 
-            Thread overlayUIThread = new Thread(() =>
+            if (!Settings.Default.disablePointerOverlay)
             {
-                OverlayWindow.Current.Show();
+                 Thread overlayUIThread = new Thread(() =>
+                 {
+                    OverlayWindow.Current.Show();
 
-                if (Settings.Default.pointer_customCursor)
-                {
-                    System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(delegate()
+                    if (Settings.Default.pointer_customCursor)
                     {
-                        D3DCursorWindow.Current.Start((new WindowInteropHelper(OverlayWindow.Current)).Handle);
-                    }));
-                }
+                        System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(delegate()
+                        {
+                            D3DCursorWindow.Current.Start((new WindowInteropHelper(OverlayWindow.Current)).Handle);
+                        }));
+                    }
 
-                System.Windows.Threading.Dispatcher.Run();
-            });
-            overlayUIThread.SetApartmentState(ApartmentState.STA);
-            overlayUIThread.IsBackground = true;
-            overlayUIThread.Priority = ThreadPriority.Highest;
-            overlayUIThread.Start();
+                    System.Windows.Threading.Dispatcher.Run();
+                 });
+                 overlayUIThread.SetApartmentState(ApartmentState.STA);
+                 overlayUIThread.IsBackground = true;
+                 overlayUIThread.Priority = ThreadPriority.Highest;
+                 overlayUIThread.Start();
+            }
 
             Application.Current.Exit += appWillExit;
             Application.Current.SessionEnding += windowsShutdownEvent;

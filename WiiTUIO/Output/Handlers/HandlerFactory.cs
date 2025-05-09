@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WiiTUIO.Output.Handlers.Touch;
 using WiiTUIO.Output.Handlers.Xinput;
+using WiiTUIO.Properties;
 
 namespace WiiTUIO.Output.Handlers
 {
@@ -24,7 +25,10 @@ namespace WiiTUIO.Output.Handlers
             all.Add(keyboardHandler);
             all.Add(new MouseHandler());
             all.Add(new XinputHandler(id));
-            all.Add(new TouchHandler(TouchOutputFactory.getCurrentProviderHandler(),id));
+            if (!Settings.Default.disablePointerOverlay)
+            {
+                all.Add(new TouchHandler(TouchOutputFactory.getCurrentProviderHandler(),id));
+            }
             return all;
         }
 

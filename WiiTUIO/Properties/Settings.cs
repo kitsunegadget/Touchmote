@@ -38,6 +38,17 @@ namespace WiiTUIO.Properties
             }
         }
 
+        private bool _disablePointerOverlay = false;
+        public bool disablePointerOverlay
+        {
+            get { return _disablePointerOverlay; }
+            set
+            {
+                _disablePointerOverlay = value;
+                OnPropertyChanged("disablePointerOverlay");
+            }
+        }
+
         private bool _pairOnStart = false;
         public bool pairOnStart
         {
